@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+Generates PWM signal based on spi input
 
 ## How to test
 
-Explain how to use your project
+Cocotb something or another
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+Presumably some source of an SPI control signal and device requiring a PWM signal
