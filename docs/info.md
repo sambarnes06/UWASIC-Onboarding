@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Generates PWM signal based on spi input
+Generates PWM signal based on a spi input
 
 ## How to test
 
