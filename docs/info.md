@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Generates PWM signal based on a spi input
+Generates PWM signal from SPI input 
 
 ## How to test
 
-Cocotb something or another
+cotob something or another
 
 ## External hardware
 
-Presumably some source of an SPI control signal and device requiring a PWM signal
+idk
