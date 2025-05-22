@@ -13,7 +13,7 @@ Generates PWM signal from SPI input
 
 ## How to test
 
-cotob something or another
+cocotb something or another
 
 ## External hardware
 
