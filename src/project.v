@@ -38,7 +38,7 @@ module tt_um_uwasic_onboarding_sam_barnes (
     .out({uio_out, uo_out})
   );
 
-  spi_peripheral (
+  spi_peripheral spi_peripheral_inst (
     .ncs(ui_in[2]),
     .rst_n(rst_n),
     .sclk(ui_in[0]),

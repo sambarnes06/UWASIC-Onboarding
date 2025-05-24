@@ -20,10 +20,6 @@ reg sclk_sync1, sclk_sync2;
 reg ncs_sync1, ncs_sync2;
 reg copi_sync1, copi_sync2;
 
-reg ncs_posedge, ncs_negedge;
-reg copi_posedge, copi_negedge;
-reg sclk_posedge;
-
 always @(posedge clk or negedge rst_n) begin
     if (~rst_n) begin
         // Resetting all registers when reset is pulled low (active low)
