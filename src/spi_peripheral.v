@@ -47,7 +47,6 @@ always @(posedge clk or negedge rst_n) begin
         // CDC synching for copi sclk and ncs
         // Synch chain of 2 registors for copi and ncs, 3 for sclk
         // newest 1 -> 2 -> 3 oldest
-        sclk_sync3 <= sclk_sync2;
         sclk_sync2 <= sclk_sync1;
         sclk_sync1 <= sclk;
 
