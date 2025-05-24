@@ -155,10 +155,6 @@ async def test_pwm_freq(dut):
     # period = t_rising_edge2 - t_rising_edge1
     # frequency = 1 / period
 
-    while (True):
-        if ()
-
-
 
     dut._log.info("PWM Frequency test completed successfully")
 
