@@ -2,12 +2,12 @@
 
 module spi_peripheral (
     input wire        ncs,
-    input wire        rst_n
+    input wire        rst_n,
     input wire        sclk,
     input wire        clk,
     input wire        copi,
-    output reg [7:0] en_out_7_0,
-    output reg [7:0] en_out_15_8,
+    output reg [7:0] en_reg_out_7_0,
+    output reg [7:0] en_reg_out_15_8,
     output reg [7:0] en_reg_pwm_7_0,
     output reg [7:0] en_reg_pwm_15_8,
     output reg [7:0] pwm_duty_cycle
@@ -27,8 +27,8 @@ reg sclk_posedge;
 always @(posedge clk or negedge rst_n) begin
     if (~rst_n) begin
         // Resetting all registers when reset is pulled low (active low)
-        en_out_7_0 <= '0;
-        en_out_15_8 <= '0;
+        en_reg_out_7_0 <= '0;
+        en_reg_out_15_8 <= '0;
         en_reg_pwm_15_8 <= '0;
         pwm_duty_cycle <= '0;
 
@@ -75,7 +75,7 @@ always @(posedge clk or negedge rst_n) begin
         if ((sclk_count == 5'd16) && (ncs_sync1 & ~ncs_sync2) && transaction[0]) begin
             case (transaction[7:0])
                 2'h00 : en_reg_out_7_0 <= transaction[15:8];
-                2'h01 : en_out_15_8 <= transaction[15:8];
+                2'h01 : en_reg_out_15_8 <= transaction[15:8];
                 2'h02 : en_reg_pwm_7_0 <= transaction[15:8];
                 2'h03 : en_reg_pwm_15_8 <= transaction[15:8];
                 2'h04 : pwm_duty_cycle <= transaction[15:8];
