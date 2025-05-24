@@ -43,7 +43,7 @@ always @(posedge clk or negedge rst_n) begin
     else begin
         // CDC synching for copi sclk and ncs
         // Synch chain of 2 registors for copi and ncs, 3 for sclk
-        // newest 1 -> 2 -> 3 oldest
+        // newest 1 -> 2 oldest
         sclk_sync2 <= sclk_sync1;
         sclk_sync1 <= sclk;
 
@@ -54,13 +54,13 @@ always @(posedge clk or negedge rst_n) begin
         copi_sync1 <= copi;
 
         // Start of transaction, ncs falling edge
-        if(~ncs_sync2 & ncs_sync1) begin
+        if(ncs_sync2 & ~ncs_sync1) begin
             transaction <= '0;
             sclk_count <= '0;
         end
 
         // During transaction, ncs low & sclk posedge
-        else if (~(ncs_sync1 | ncs_sync2) && (sclk_sync2 & ~sclk_sync2)) begin
+        else if (~(ncs_sync1 | ncs_sync2) && (sclk_sync1 & ~sclk_sync2)) begin
             if (sclk_count < 5'd15) begin
                 transaction[sclk_count[3:0]] <= copi_sync2;
                 sclk_count <= sclk_count + 1;
