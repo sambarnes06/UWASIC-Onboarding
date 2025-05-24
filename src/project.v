@@ -38,6 +38,10 @@ module tt_um_uwasic_onboarding_sam_barnes (
     .out({uio_out, uo_out})
   );
 
+  spi_peripheral (
+    
+  )
+
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, clk, rst_n, 1'b0, uio_in, ui_in[7:3]};
   // Test
