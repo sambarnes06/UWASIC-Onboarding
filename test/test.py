@@ -106,7 +106,7 @@ async def test_spi(dut):
     dut._log.info("Test project behavior")
     dut._log.info("Write transaction, address 0x00, data 0xF0")
     ui_in_val = await send_spi_transaction(dut, 1, 0x00, 0xF0)  # Write transaction
-    assert dut.uo_out.value == 0xF0, f"Expected 0xF0, got {dut.uo_out.value}"
+    assert dut.uo_out.value == 0xF0, f'Expected 0xF0, got {dut.uo_out.value}'
     await ClockCycles(dut.clk, 1000) 
 
     dut._log.info("Write transaction, address 0x01, data 0xCC")
@@ -152,10 +152,21 @@ async def test_spi(dut):
 @cocotb.test()
 async def test_pwm_freq(dut):
     # Write your test here
+    # period = t_rising_edge2 - t_rising_edge1
+    # frequency = 1 / period
+
+    while (True):
+        if ()
+
+
+
     dut._log.info("PWM Frequency test completed successfully")
 
 
 @cocotb.test()
 async def test_pwm_duty(dut):
     # Write your test here
+    # high_time = t_falling_edge - t_rising_edge
+    # duty_cycle = (high_time / period) * 100%
+
     dut._log.info("PWM Duty Cycle test completed successfully")
