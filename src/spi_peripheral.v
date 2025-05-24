@@ -14,7 +14,7 @@ module spi_peripheral (
 );
 
 reg [15:0] transaction;
-reg [4:0] sclk_count;
+reg [3:0] sclk_count;
 
 reg sclk_sync1, sclk_sync2;
 reg ncs_sync1, ncs_sync2;
