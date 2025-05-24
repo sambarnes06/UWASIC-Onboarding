@@ -17,7 +17,6 @@ module tt_um_uwasic_onboarding_sam_barnes (
 );
 
   // All output pins must be assigned. If not used, assign to 0.
-  assign uio_out = 0;
   assign uio_oe  = 8'hFF;
 
   wire [7:0] en_reg_out_7_0;
