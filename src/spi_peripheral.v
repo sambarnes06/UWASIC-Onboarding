@@ -61,7 +61,7 @@ always @(posedge clk or negedge rst_n) begin
 
         // During transaction, ncs low & sclk posedge
         else if (~(ncs_sync1 | ncs_sync2) && (sclk_sync2 & ~sclk_sync2)) begin
-            if (sclk_count < 4'd16) begin
+            if (sclk_count != 4'd16) begin
                 transaction[sclk_count] <= copi_sync2;
                 sclk_count <= sclk_count + 1;
             end
