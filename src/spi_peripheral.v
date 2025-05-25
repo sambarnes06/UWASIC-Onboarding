@@ -62,19 +62,19 @@ always @(posedge clk or negedge rst_n) begin
         // During transaction, ncs low & sclk posedge
         else if (~(ncs_sync2) && (sclk_sync1 & ~sclk_sync2)) begin
             if (sclk_count < 5'd16) begin
-                transaction[sclk_count[3:0]] <= copi_sync2;
+                transaction <= {transaction[14:0], copi_sync2};
                 sclk_count <= sclk_count + 1;
             end
         end
 
         // After transaction, ncs rising edge, writing bit high and clk = 16
-        if ((sclk_count == 5'd16) && (ncs_sync1 & ~ncs_sync2) && transaction[0]) begin
-            case (transaction[7:0])
-                8'h00 : en_reg_out_7_0 <= transaction[15:8];
-                8'h01 : en_reg_out_15_8 <= transaction[15:8];
-                8'h02 : en_reg_pwm_7_0 <= transaction[15:8];
-                8'h03 : en_reg_pwm_15_8 <= transaction[15:8];
-                8'h04 : pwm_duty_cycle <= transaction[15:8];
+        if ((sclk_count == 5'd16) && (ncs_sync1 & ~ncs_sync2) && transaction[15]) begin
+            case (transaction[14:8])
+                8'h00 : en_reg_out_7_0 <= transaction[7:0];
+                8'h01 : en_reg_out_15_8 <= transaction[7:0];
+                8'h02 : en_reg_pwm_7_0 <= transaction[7:0];
+                8'h03 : en_reg_pwm_15_8 <= transaction[7:0];
+                8'h04 : pwm_duty_cycle <= transaction[7:0];
                 default: ;
             endcase
 
@@ -86,4 +86,3 @@ end
 
 
 endmodule
-
