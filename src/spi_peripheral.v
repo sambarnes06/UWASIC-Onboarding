@@ -32,6 +32,7 @@ always @(posedge clk or negedge rst_n) begin
         transaction <= '0;
         sclk_sync2 <= '0;
         sclk_sync1 <= '0;
+        sclk_count <= '0;
 
         ncs_sync2 <= '0;
         ncs_sync1 <= '0;
