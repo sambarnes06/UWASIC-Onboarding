@@ -181,7 +181,7 @@ async def test_pwm_freq(dut):
     test_start_time = cocotb.utils.get_sim_time(units="ns")
 
     # Check falling edge of clock
-    while dut.uo.value != 0:
+    while dut.uo_out.value != 0:
         await ClockCycles(dut.clk, 1)
         if (cocotb.utils.get_sim_time(units="ns") - test_start_time > s_to_ns):
             return -1 # Timed out over a second
