@@ -155,6 +155,69 @@ async def test_pwm_freq(dut):
     # period = t_rising_edge2 - t_rising_edge1
     # frequency = 1 / period
 
+    dut._log.info("Start PWM freq test")
+
+    clock = Clock(dut.clk, 100, units="ns") # 10MHz clock
+    cocotb.start_soon(clock.start())
+
+    # Reset
+    dut._log.info("Reset")
+    dut.ena.value = 1
+    ncs = 1
+    bit = 0
+    sclk = 0
+    dut.ui_in.value = ui_in_logicarray(ncs, bit, sclk)
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 5)
+    dut.rst_n.value = 1
+    await ClockCycles(dut.clk, 5)
+
+    s_to_ns = 1 ** 6 # Seconds in nano seconds
+
+    await send_spi_transaction(dut, 1, 0x00, 0x01) # Enable outputs
+    await send_spi_transaction(dut, 1, 0x04, 0x80) # Set duty cycle to 50%
+    await send_spi_transaction(dut, 1, 0x01, 0x01) # Enable uio_out
+
+    test_start_time = cocotb.utils.get_sim_time(units="ns")
+
+    # Check falling edge of clock
+    while dut.uo.value != 0:
+        await ClockCycles(dut.clk, 1)
+        if (cocotb.utils.get_sim_time(units="ns") - test_start_time > s_to_ns):
+            return -1 # Timed out over a second
+    
+    # Check rising edge of clock to determine start time of sample
+    while dut.uo_out.value == 0:
+        await ClockCycles(dut.clk, 1)
+        if (cocotb.utils.get_sim_time(units="ns") - test_start_time > s_to_ns)
+            return -1 # Timed out over a second
+        
+    sample_start_time = cocotb.utils.get_sim_time(units="ns")
+
+    # Waiting for falling edge to sample period
+    while dut.uo.value:
+        await ClockCycles(dut.clk, 1)
+    
+    # Waiting for rising edge to sample period
+    while not dut.uo_out.value:
+        await ClockCycles(dut.clk, 1)
+
+    frequency = 1 ** 9 / ((cocotb.utils.get_sim_time(units="ns") - sample_start_time))
+    dut._log.info('Frequency = ' + frequency + 'Hz')
+
+    assert frequency >= 2970 and frequency <= 3030, 'Frequency test fail, not between 2970 and 3030 Hz'
+    dut._lot.info('Frequency test passed')
+    
+        
+    
+    
+
+
+
+
+
+
+
 
     dut._log.info("PWM Frequency test completed successfully")
 
@@ -164,5 +227,7 @@ async def test_pwm_duty(dut):
     # Write your test here
     # high_time = t_falling_edge - t_rising_edge
     # duty_cycle = (high_time / period) * 100%
+
+    dut._log.info("Start PWM duty cycle test")
 
     dut._log.info("PWM Duty Cycle test completed successfully")

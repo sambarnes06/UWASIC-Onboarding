@@ -78,9 +78,7 @@ always @(posedge clk or negedge rst_n) begin
                 7'h04 : pwm_duty_cycle <= transaction[7:0];
                 default: ;
             endcase
-
         end
-
     end
 end
 
