@@ -180,6 +180,8 @@ async def test_pwm_freq(dut):
 
     test_start_time = cocotb.utils.get_sim_time(units="ns")
 
+    dut._log.info("94")
+
     # Check falling edge of clock
     while dut.uo_out.value != 0:
         await ClockCycles(dut.clk, 1)
