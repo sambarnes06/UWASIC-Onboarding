@@ -195,7 +195,7 @@ async def test_pwm_freq(dut):
     sample_start_time = cocotb.utils.get_sim_time(units="ns")
 
     # Waiting for falling edge to sample period
-    while dut.uo.value:
+    while dut.uo_out.value:
         await ClockCycles(dut.clk, 1)
     
     # Waiting for rising edge to sample period
