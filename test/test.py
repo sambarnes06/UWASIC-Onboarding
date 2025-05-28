@@ -175,8 +175,8 @@ async def test_pwm_freq(dut):
     s_to_ns = 10 ** 9 # Seconds in nano seconds
 
     await send_spi_transaction(dut, 1, 0x00, 0x01) # Enable outputs
+    await send_spi_transaction(dut, 1, 0x02, 0x01) # Enable PWM
     await send_spi_transaction(dut, 1, 0x04, 0x80) # Set duty cycle to 50%
-    await send_spi_transaction(dut, 1, 0x01, 0x01) # Enable uio_out
 
     test_start_time = cocotb.utils.get_sim_time(units="ns")
 
