@@ -229,6 +229,8 @@ async def test_pwm_duty(dut):
     clock = Clock(dut.clk, 100, units="ns")
     cocotb.start_soon(clock.start())
 
+    s_to_ns = 10 ** 9 # Seconds in nano seconds
+
     # Reset
     dut._log.info("Reset")
     dut.ena.value = 1
