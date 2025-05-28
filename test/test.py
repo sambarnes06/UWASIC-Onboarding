@@ -202,7 +202,7 @@ async def test_pwm_freq(dut):
     while not dut.uo_out.value:
         await ClockCycles(dut.clk, 1)
 
-    frequency = 1 ** 9 / ((cocotb.utils.get_sim_time(units="ns") - sample_start_time))
+    frequency = 10 ** 9 / ((cocotb.utils.get_sim_time(units="ns") - sample_start_time))
     dut._log.info(f'Frequency = {frequency} Hz')
 
 
