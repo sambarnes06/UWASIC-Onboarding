@@ -206,18 +206,6 @@ async def test_pwm_freq(dut):
     dut._log.info('Frequency = ' + frequency + 'Hz')
 
     assert frequency >= 2970 and frequency <= 3030, 'Frequency test fail, not between 2970 and 3030 Hz'
-    dut._lot.info('Frequency test passed')
-    
-        
-    
-    
-
-
-
-
-
-
-
 
     dut._log.info("PWM Frequency test completed successfully")
 
