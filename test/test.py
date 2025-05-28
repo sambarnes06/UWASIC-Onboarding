@@ -203,11 +203,13 @@ async def test_pwm_freq(dut):
         await ClockCycles(dut.clk, 1)
 
     frequency = 1 ** 9 / ((cocotb.utils.get_sim_time(units="ns") - sample_start_time))
-    dut._log.info('Frequency = ' + frequency + 'Hz')
+    dut._log.info(f'Frequency = {frequency} Hz')
+
 
     assert frequency >= 2970 and frequency <= 3030, 'Frequency test fail, not between 2970 and 3030 Hz'
 
-    dut._log.info("PWM Frequency test completed successfully")
+
+    dut._log.info('PWM Frequency test completed successfully')
 
 
 @cocotb.test()
