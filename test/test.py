@@ -316,7 +316,7 @@ async def test_pwm_duty(dut):
         await ClockCycles(dut.clk, 1)
         if (dut.uo_out.value != 0):
             assert not dut.uo_out.value, 'Signal high for 0 percent duty cycle'
-        if (cocotb.utils.get_sim_time(unit="ns") - test_start_time > 10 ** 4):
+        if (cocotb.utils.get_sim_time(units="ns") - test_start_time > 10 ** 4):
             break
     
     await send_spi_transaction(dut, 0x04, 0xFF) # 100% duty cycle
