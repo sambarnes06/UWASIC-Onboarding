@@ -304,7 +304,6 @@ async def test_pwm_duty(dut):
     sampled_period = cocotb.utils.get_sim_time(units="ns") - sample_start_time
 
     ds = (sampled_period / period) * 100
-    dut._log.info()
 
     dut.log.info('Duty cycle is ' + str(ds) + '%, should be 50%')
     assert ds == 50, 'Duty cycle is not 50%, ' + str(ds)
