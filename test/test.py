@@ -320,7 +320,7 @@ async def test_pwm_duty(dut):
             break
     
     await send_spi_transaction(dut, 1, 0x04, 0xFF) # 100% duty cycle
-    test_start_time = cocotb.get_sim_time(units='ns')
+    test_start_time = cocotb.utils.get_sim_time(units='ns')
 
     while dut.uo_out.value != 0:
         await ClockCycles(dut.clk, 1)
