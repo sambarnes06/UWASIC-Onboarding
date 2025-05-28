@@ -172,7 +172,7 @@ async def test_pwm_freq(dut):
     dut.rst_n.value = 1
     await ClockCycles(dut.clk, 5)
 
-    s_to_ns = 10 ** 6 # Seconds in nano seconds
+    s_to_ns = 10 ** 9 # Seconds in nano seconds
 
     await send_spi_transaction(dut, 1, 0x00, 0x01) # Enable outputs
     await send_spi_transaction(dut, 1, 0x04, 0x80) # Set duty cycle to 50%
